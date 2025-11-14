@@ -15,12 +15,7 @@
     <header class="header">
       <div class="navbar container">
         <div class="logo">
-          <img
-            style="margin-top: 25px"
-            src="./images/logo.png"
-            height="120px"
-            alt=""
-          />
+          <img src="./images/logo.png" alt="" />
         </div>
         <nav>
           <ul class="nav-links">
@@ -31,11 +26,11 @@
             <li><a href="#projects">مشاريعي</a></li>
             <li><a href="#contact">تواصل</a></li>
           </ul>
-          <div class="hamburger">
+          <button class="hamburger" aria-label="القائمة" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
-          </div>
+          </button>
         </nav>
       </div>
     </header>
@@ -159,10 +154,7 @@
               منصة إدارة المدارس المتكاملة، تشمل تسجيل الطلاب والفصول والصفوف،
               باستخدام ASP.NET Core وAngular.
             </p>
-            <a
-              href="https://github.com/RedhwanAdel/YemenSchoolsV2"
-              target="_blank"
-              class="project-link"
+            <a href="./slidedr.html" target="_blank" class="project-link"
               >عرض المشروع</a
             >
           </div>
@@ -293,8 +285,21 @@
       const hamburger = document.querySelector(".hamburger");
       const navLinks = document.querySelector(".nav-links");
 
+      // Toggle menu open / close
       hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("open");
+        const isOpen = navLinks.classList.toggle("open");
+        hamburger.classList.toggle("active");
+        // Update ARIA attribute for accessibility
+        hamburger.setAttribute("aria-expanded", isOpen);
+      });
+
+      // Close menu when a link is clicked (mobile)
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          hamburger.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+        });
       });
     </script>
     <script>
